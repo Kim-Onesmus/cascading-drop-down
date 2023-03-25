@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Cascading Dropdown Menu</title>
+    <style>
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+
+        select {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    HTML code for the cascading dropdowns <br><br>
+    <select id="school">
+        <option value="">Select School</option>
+        <option value="science">Science technology and Engineering</option>
+        <option value="inforcoms">Inforcoms</option>
+        <option value="agriculture">Agriculture</option>
+        <option value="business">Business</option>
+    </select><br><br>
+    <select id="department" disabled>
+        <option value="">Select Department</option>
+    </select>
+    <br><br>
+    <select id="course" disabled>
+        <option value="">Select Course</option>
+    </select>
+    <br><br>
+    <select id="unit" disabled>
+        <option value="">Select Unit</option>
+    </select>
+    <br><br>
+    <select id="year" disabled>
+        <option value="">Select Year</option>
+        <option value="1">Year 1</option>
+        <option value="2">Year 2</option>
+        <option value="3">Year 3</option>
+        <option value="4">Year 4</option>
+    </select>
+    <br><br>
+    <select id="semester" disabled>
+        <option value="">Select Semester</option>
+        <option value="1">Semester 1</option>
+        <option value="2">Semester 2</option>
+    </select>
+    <br><br>
+</body>
+<script>
+    const schoolDropdown = document.getElementById("school");
+    const departmentDropdown = document.getElementById("department");
+    const courseDropdown = document.getElementById("course");
+    const unitDropdown = document.getElementById("unit");
+    const yearDropdown = document.getElementById("year");
+    const semesterDropdown = document.getElementById("semester");
+
+    const departments = {
+        science: ["Maths statistics and computing", "Mechanical Engineering", "Electrical Engineering"],
+        inforcoms: ["Marketing", "Finance", "Management"],
+        agriculture: ["Marketing", "Finance", "Management"],
+        business: ["Marketing", "Finance", "Management"],
+
+    };
+
+    const courses = {
+        "Civil Engineering": ["CE101", "CE201", "CE301"],
+        "Mechanical Engineering": ["ME101", "ME201", "ME301"],
+        "Electrical Engineering": ["EE101", "EE201", "EE301"],
+        "Marketing": ["MKT101", "MKT201", "MKT301"],
+        "Finance": ["FIN101", "FIN201", "FIN301"],
+        "Management": ["MGT101", "MGT201", "MGT301"]
+    };
+
+    const units = {
+        "CE101": ["Unit 1", "Unit 2", "Unit 3"],
+        "CE201": ["Unit 1", "Unit 2", "Unit 3"],
+        "CE301": ["Unit 1", "Unit 2", "Unit 3"],
+        "ME101": ["Unit 1", "Unit 2", "Unit 3"],
+        "ME201": ["Unit 1", "Unit 2", "Unit 3"],
+        "ME301": ["Unit 1", "Unit 2", "Unit 3"],
+        "EE101": ["Unit 1", "Unit 2", "Unit 3"],
+        "EE201": ["Unit 1", "Unit 2", "Unit 3"],
+        "EE301": ["Unit 1", "Unit 2", "Unit 3"],
+        "MKT101": ["Unit 1", "Unit 2", "Unit 3"],
+        "MKT201": ["Unit 1", "Unit 2", "Unit 3"],
+        "MKT301": ["Unit 1", "Unit 2", "Unit 3"],
+        "FIN101": ["Unit 1", "Unit 2", "Unit 3"],
+        "FIN201": ["Unit 1", "Unit 2", "Unit 3"],
+        "FIN301": ["Unit 1", "Unit 2", "Unit 3"],
+        "MGT101": ["Unit 1", "Unit 2", "Unit 3"],
+        "MGT201": ["Unit 1", "Unit 2", "Unit 3"],
+        "MGT301": ["Unit 1", "Unit 2", "Unit 3"]
+    };
+
+    function populateDepartments() {
+        const selectedSchool = schoolDropdown.value;
+        departmentDropdown.innerHTML = "";
+        departmentDropdown.disabled = false;
+        courseDropdown.innerHTML = "";
+        courseDropdown.disabled = true;
+        unitDropdown.innerHTML = "";
+        unitDropdown.disabled = true;
+        yearDropdown.disabled = true;
+        semesterDropdown.disabled = true;
+
+        if (selectedSchool !== "") {
+            const departmentsArray = departments[selectedSchool];
+            departmentsArray.forEach((department) => {
+                const option = document.createElement("option");
+                option.value = department;
+                option.text = department;
+                departmentDropdown.appendChild(option);
+            });
+        }
+    }
+    function populateCourses() {
+        const selectedDepartment = departmentDropdown.value;
+        courseDropdown.innerHTML = "";
+        courseDropdown.disabled = false;
+        unitDropdown.innerHTML = "";
+        unitDropdown.disabled = true;
+        yearDropdown.disabled = true;
+        semesterDropdown.disabled = true;
+
+        if (selectedDepartment !== "") {
+            const coursesArray = courses[selectedDepartment];
+            coursesArray.forEach((course) => {
+                const option = document.createElement("option");
+                option.value = course;
+                option.text = course;
+                courseDropdown.appendChild(option);
+            });
+        }
+    }
+
+    function populateUnits() {
+        const selectedCourse = courseDropdown.value;
+        unitDropdown.innerHTML = "";
+        unitDropdown.disabled = false;
+        yearDropdown.disabled = true;
+        semesterDropdown.disabled = true;
+
+        if (selectedCourse !== "") {
+            const unitsArray = units[selectedCourse];
+            unitsArray.forEach((unit) => {
+                const option = document.createElement("option");
+                option.value = unit;
+                option.text = unit;
+                unitDropdown.appendChild(option);
+            });
+        }
+    }
+
+    function populateYears() {
+        yearDropdown.disabled = false;
+        semesterDropdown.disabled = true;
+    }
+
+    function populateSemesters() {
+        semesterDropdown.disabled = false;
+    }
+
+    schoolDropdown.addEventListener("change", populateDepartments);
+    departmentDropdown.addEventListener("change", populateCourses);
+    courseDropdown.addEventListener("change", populateUnits);
+    unitDropdown.addEventListener("change", populateYears);
+    yearDropdown.addEventListener("change", populateSemesters);
+</script>
+
+</html>
