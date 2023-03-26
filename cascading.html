@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Cascading Dropdown</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+    <h2>Select a Unit</h2>
+    <form>
+        <label for="school">School:</label>
+        <select id="school" name="school">
+            <option value="">-- Select School --</option>
+            <option value="school1">School 1</option>
+            <option value="school2">School 2</option>
+            <option value="school3">School 3</option>
+        </select>
+        <br><br>
+
+        <label for="department">Department:</label>
+        <select id="department" name="department" disabled>
+            <option value="">-- Select Department --</option>
+        </select>
+        <br><br>
+
+        <label for="course">Course:</label>
+        <select id="course" name="course" disabled>
+            <option value="">-- Select Course --</option>
+        </select>
+        <br><br>
+
+        <label for="year">Year:</label>
+        <select id="year" name="year" disabled>
+            <option value="">-- Select Year --</option>
+        </select>
+        <br><br>
+
+        <label for="semester">Semester:</label>
+        <select id="semester" name="semester" disabled>
+            <option value="">-- Select Semester --</option>
+        </select>
+        <br><br>
+
+        <label for="unit">Unit:</label>
+        <select id="unit" name="unit" disabled>
+            <option value="">-- Select Unit --</option>
+        </select>
+        <br><br>
+    </form>
+
+    <!-- <script>
+        $(document).ready(function () {
+            $('#school').change(function () {
+                $('#department').prop('disabled', false);
+                $('#course').prop('disabled', true);
+                $('#year').prop('disabled', true);
+                $('#semester').prop('disabled', true);
+                $('#unit').prop('disabled', true);
+
+                $('#department').empty();
+                $('#course').empty();
+                $('#year').empty();
+                $('#semester').empty();
+                $('#unit').empty();
+
+                $('#department').append($('<option>', {
+                    value: '',
+                    text: '-- Select Department --'
+                }));
+
+                if ($('#school').val() == 'school1') {
+                    $('#department').append($('<option>', {
+                        value: 'math_comp',
+                        text: 'Department of Mathematics and Computing'
+                    }));
+                    $('#department').append($('<option>', {
+                        value: 'phy_sci',
+                        text: 'Department of Physical Sciences'
+                    }));
+                    $('#department').append($('<option>', {
+                        value: 'bio_sci',
+                        text: 'Department of Biological Sciences'
+                    }));
+                } else if ($('#school').val() == 'school2') {
+                    $('#department').append($('<option>', {
+                        value: 'department2',
+                        text: 'Department 2'
+                    }));
+                } else if ($('#school').val() == 'school3') {
+                    $('#department').append($('<option>', {
+                        value: 'department3',
+                        text: 'Department 3'
+                    }));
+                }
+            });
+
+            $('#department').change(function () {
+                $('#course').prop('disabled', false);
+                $('#year').prop('disabled', true);
+                $('#semester').prop('disabled', true);
+                $('#unit').prop('disabled', true);
+
+                $('#course').empty();
+                $('#year').empty();
+                $('#semester').empty();
+                $('#unit').empty();
+
+                $('#course').append($('<option>', {
+                    value: '',
+                    text: '-- Select Course --'
+                }));
+
+                if ($('#department').val() == 'department1') {
+                    $('#course').append($('<option>', {
+                        value: 'course1',
+                        text: 'Course 1'
+                    }));
+                } else if ($('#department').val() == 'department2') {
+                    $('#course').append($('<option>', {
+                        value: 'course2',
+                        text: 'Course 2'
+                    }));
+                } else if ($('#department').val() == 'department3') {
+                    $('#course').append($('<option>', {
+                        value: 'course3',
+                        text: 'Course 3'
+                    }));
+                }
+            });
+
+            $('#course').change(function () {
+                $('#year').prop('disabled', false);
+                $('#semester').prop('disabled', true);
+                $('#unit').prop('disabled', true);
+
+                $('#year').empty();
+                $('#semester').empty();
+                $('#unit').empty();
+
+                $('#year').append($('<option>', {
+                    value: '',
+                    text: '-- Select Year --'
+                }));
+
+                if ($('#course').val() == 'course1') {
+                    $('#year').append($('<option>', {
+                        value: 'year1',
+                        text: 'Year 1'
+                    }));
+                } else if ($('#course').val() == 'course2') {
+                    $('#year').append($('<option>', {
+                        value: 'year2',
+                        text: 'Year 2'
+                    }));
+                } else if ($('#course').val() == 'course3') {
+                    $('#year').append($('<option>', {
+                        value: 'year3',
+                        text: 'Year 3'
+                    }));
+                }
+            });
+
+            $('#year').change(function () {
+                $('#semester').prop('disabled', false);
+                $('#unit').prop('disabled', true);
+
+                $('#semester').empty();
+                $('#unit').empty();
+
+                $('#semester').append($('<option>', {
+                    value: '',
+                    text: '-- Select Semester --'
+                }));
+
+                if ($('#year').val() == 'year1') {
+                    $('#semester').append($('<option>', {
+                        value: 'semester1',
+                        text: 'Semester 1'
+                    }));
+                } else if ($('#year').val() == 'year2') {
+                    $('#semester').append($('<option>', {
+                        value: 'semester2',
+                        text: 'Semester 2'
+                    }));
+                } else if ($('#year').val() == 'year3') {
+                    $('#semester').append($('<option>', {
+                        value: 'semester3',
+                        text: 'Semester 3'
+                    }));
+                }
+            });
+
+            $('#semester').change(function () {
+                $('#unit').prop('disabled', false);
+                $('#unit').empty();
+
+                $('#unit').append($('<option>', {
+                    value: '',
+                    text: '-- Select Unit --'
+                }));
+
+                if ($('#semester').val() == 'semester1') {
+                    $('#unit').append($('<option>', {
+                        value: 'unit1',
+                        text: 'Unit 1'
+                    }));
+                } else if ($('#semester').val() == 'semester2') {
+                    $('#unit').append($('<option>', {
+                        value: 'unit2',
+                        text: 'Unit 2'
+                    }));
+                } else if ($('#semester').val() == 'semester3') {
+                    $('#unit').append($('<option>', {
+                        value: 'unit3',
+                        text: 'Unit 3'
+                    }));
+                }
+            });
+        });
+    </script> -->
+</body>
+</html>
